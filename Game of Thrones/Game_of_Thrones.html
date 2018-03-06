@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game of Thrones</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("img").click(function(){
+                var house = $(this).attr("class");
+                $.get("https://anapioficeandfire.com/api/houses/"+house+"/",function(res){
+                    console.log(res)
+                    $("#house-info").html("<h3>Name: "+res['name']+"</h3><h3>Words: "+res['words']+"</h3><h3>Titles: "+res['titles']+"</h3>")
+                },"json")
+            })
+        })
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper{
+            margin: 20px auto;
+            width: 1200px;
+            text-align: center;
+        }
+
+        img{
+            width: 250px;
+            height: 150px;
+            margin: 0px 5px 30px 5px;
+        }
+        
+        #house-info{
+            margin: 10px auto;
+            width: 500px;
+            height: 300px;
+            border: 5px solid black;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        #house-info h3{
+            margin: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <img class="362" src="stark.jpg" alt="">
+        <img class="378" src="targaryen.jpg" alt="">
+        <img class="229" src="lannister.jpg" alt="">
+        <img class="17" src="baratheon.png" alt="">
+        <h2>House Details</h2>
+        <div id="house-info">
+        </div>
+    </div>
+</body>
+</html>

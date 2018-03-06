@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Forecast App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(document).on("click",".weather-btn", function(){
+                var place = $(".location").val();
+                $.get("https://api.openweathermap.org/data/2.5/weather?q="+place+"&&appid=e09bc3547ef43f81160e369b47a720a5", function(res){
+                    console.log(res)
+                    var temp = Math.floor((res['main']['temp'])*(9/5)-459.67);
+
+                    $("#weather-info").html("<h1>"+ res['name'] +"</h1><h3>Temperature: "+ temp +" &#8457;</h3>")
+                }, "json");
+                return false;
+            })            
+        })
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper{
+            margin: 20px auto;
+            width: 970px;
+        }
+        
+        #weather-info{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <form>
+            <input type="text" class="location">
+            <input type="submit" value="Search Weather" class="weather-btn">
+        </form>
+        <div id="weather-info"></div>
+        
+
+    </div>
+</body>
+</html>
